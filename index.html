@@ -1,1 +1,528 @@
-<img src="buddhism/mandala.jpeg">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sacred Mandala - Journey to Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #f5f5f5;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .cosmic-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mandala-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 2rem 0;
+        }
+
+        .mandala-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            box-shadow: 
+                0 0 60px rgba(255, 215, 0, 0.4),
+                0 0 120px rgba(255, 165, 0, 0.2),
+                inset 0 0 60px rgba(255, 255, 255, 0.1);
+            animation: rotate 30s linear infinite, pulse 4s ease-in-out infinite alternate;
+            filter: brightness(1.1) contrast(1.2) saturate(1.3);
+            transition: all 0.3s ease;
+        }
+
+        .mandala-image:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 0 80px rgba(255, 215, 0, 0.6),
+                0 0 160px rgba(255, 165, 0, 0.3),
+                inset 0 0 80px rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0% { filter: brightness(1.1) contrast(1.2) saturate(1.3); }
+            100% { filter: brightness(1.3) contrast(1.4) saturate(1.5); }
+        }
+
+        .mandala-rings {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .ring {
+            position: absolute;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 50%;
+            animation: rotate-reverse 20s linear infinite;
+        }
+
+        .ring:nth-child(1) { width: 450px; height: 450px; top: -225px; left: -225px; }
+        .ring:nth-child(2) { width: 500px; height: 500px; top: -250px; left: -250px; animation-duration: 25s; }
+        .ring:nth-child(3) { width: 550px; height: 550px; top: -275px; left: -275px; animation-duration: 35s; }
+
+        @keyframes rotate-reverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffd700, #ffb347, #ff6b35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 30px rgba(255, 215, 0, 0.5); }
+            100% { text-shadow: 0 0 40px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 179, 71, 0.4); }
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-bottom: 3rem;
+            font-style: italic;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.7);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-10px) translateX(-50%); }
+            60% { transform: translateY(-5px) translateX(-50%); }
+        }
+
+        .content-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #ffd700;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, #ffd700, #ffb347);
+            border-radius: 2px;
+        }
+
+        .meaning-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .meaning-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .meaning-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 179, 71, 0.05));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .meaning-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
+            border-color: rgba(255, 215, 0, 0.4);
+        }
+
+        .meaning-card:hover::before {
+            opacity: 1;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: #ffd700;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffb347;
+        }
+
+        .card-text {
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .meditation-section {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .meditation-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="mandala-pattern" patternUnits="userSpaceOnUse" width="50" height="50"><circle cx="25" cy="25" r="2" fill="%23ffd700" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23mandala-pattern)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .meditation-text {
+            font-size: 1.3rem;
+            line-height: 2;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .interactive-mandala {
+            width: 300px;
+            height: 300px;
+            margin: 3rem auto;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .interactive-mandala svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+        }
+
+        .mandala-path {
+            fill: none;
+            stroke: #ffd700;
+            stroke-width: 2;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .mandala-path:hover {
+            opacity: 1;
+            stroke-width: 3;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.8));
+        }
+
+        .floating-symbols {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .symbol {
+            position: absolute;
+            font-size: 2rem;
+            color: rgba(255, 215, 0, 0.6);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 1px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .footer-text {
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .mandala-container { width: 300px; height: 300px; }
+            .meaning-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="cosmic-background" id="stars"></div>
+
+    <section class="hero-section">
+        <div class="mandala-container">
+            <img src="buddhism/mandala.jpeg" alt="Sacred Mandala" class="mandala-image">
+            <div class="mandala-rings">
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+            </div>
+        </div>
+        <h1 class="hero-title">Sacred Mandala</h1>
+        <p class="hero-subtitle">Journey to the Center of Being</p>
+        <div class="scroll-indicator">
+            <div style="font-size: 2rem;">↓</div>
+            <div>Explore the Sacred Geometry</div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <h2 class="section-title">The Sacred Circle</h2>
+        <div class="meaning-grid">
+            <div class="meaning-card">
+                <div class="card-icon">🕉️</div>
+                <h3 class="card-title">Unity & Wholeness</h3>
+                <p class="card-text">The mandala represents the universe and our place within it. Its circular form symbolizes completeness, unity, and the eternal cycle of existence that connects all beings.</p>
+            </div>
+            <div class="meaning-card">
+                <div class="card-icon">🧘</div>
+                <h3 class="card-title">Meditation Focus</h3>
+                <p class="card-text">Used as a meditation aid, mandalas help center the mind and guide practitioners inward. The intricate patterns provide a focal point for contemplation and spiritual growth.</p>
+            </div>
+            <div class="meaning-card">
+                <div class="card-icon">⚡</div>
+                <h3 class="card-title">Sacred Geometry</h3>
+                <p class="card-text">Every line, curve, and symbol is precisely placed according to sacred mathematical principles. These geometric patterns reflect the underlying order of the cosmos.</p>
+            </div>
+            <div class="meaning-card">
+                <div class="card-icon">🌸</div>
+                <h3 class="card-title">Spiritual Journey</h3>
+                <p class="card-text">The path from outer edge to center mirrors our spiritual journey from the material world to enlightenment, representing transformation and awakening.</p>
+            </div>
+            <div class="meaning-card">
+                <div class="card-icon">🌀</div>
+                <h3 class="card-title">Balance & Harmony</h3>
+                <p class="card-text">The symmetrical design represents perfect balance between opposing forces - light and dark, material and spiritual, finite and infinite.</p>
+            </div>
+            <div class="meaning-card">
+                <div class="card-icon">✨</div>
+                <h3 class="card-title">Divine Protection</h3>
+                <p class="card-text">Traditionally created as sacred spaces, mandalas serve as spiritual shields, protecting and blessing those who create, view, or meditate upon them.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="meditation-section">
+        <h2 class="section-title">Meditative Contemplation</h2>
+        <p class="meditation-text">
+            "As you gaze upon this sacred mandala, allow your eyes to follow its intricate patterns from the outer rim toward the center. Let the geometric harmonies guide your breath, your thoughts, and your spirit inward. In this circular journey, discover the universe reflected within yourself, and yourself reflected in the infinite cosmos."
+        </p>
+        
+        <div class="interactive-mandala" onclick="animateMandala()">
+            <svg viewBox="0 0 200 200">
+                <defs>
+                    <radialGradient id="mandalaGradient" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.8" />
+                        <stop offset="100%" style="stop-color:#ff6b35;stop-opacity:0.4" />
+                    </radialGradient>
+                </defs>
+                <circle cx="100" cy="100" r="95" class="mandala-path" stroke="url(#mandalaGradient)" />
+                <circle cx="100" cy="100" r="75" class="mandala-path" />
+                <circle cx="100" cy="100" r="55" class="mandala-path" />
+                <circle cx="100" cy="100" r="35" class="mandala-path" />
+                <circle cx="100" cy="100" r="15" class="mandala-path" />
+                <path d="M100,5 L105,95 L100,195 L95,95 Z" class="mandala-path" />
+                <path d="M5,100 L95,105 L195,100 L95,95 Z" class="mandala-path" />
+                <path d="M29,29 L95,95 L171,171 L105,105 Z" class="mandala-path" />
+                <path d="M171,29 L105,95 L29,171 L95,105 Z" class="mandala-path" />
+            </svg>
+            <div class="floating-symbols">
+                <div class="symbol" style="top: 10%; left: 20%;">☸</div>
+                <div class="symbol" style="top: 20%; right: 15%; animation-delay: -2s;">🕉</div>
+                <div class="symbol" style="bottom: 15%; left: 25%; animation-delay: -4s;">☯</div>
+                <div class="symbol" style="bottom: 20%; right: 20%; animation-delay: -1s;">✦</div>
+            </div>
+        </div>
+        
+        <p style="color: rgba(255, 255, 255, 0.7); font-style: italic; margin-top: 2rem;">
+            Click the mandala above to activate its energy
+        </p>
+    </section>
+
+    <footer class="footer">
+        <p class="footer-text">
+            "In the center of the mandala, where all lines converge, lies the still point of the turning world." <br>
+            May this sacred geometry guide you to inner peace and universal understanding.
+        </p>
+    </footer>
+
+    <script>
+        // Create starfield background
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numStars = 100;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.width = star.style.height = Math.random() * 3 + 1 + 'px';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Animate interactive mandala
+        function animateMandala() {
+            const mandala = document.querySelector('.interactive-mandala svg');
+            const paths = mandala.querySelectorAll('.mandala-path');
+            
+            paths.forEach((path, index) => {
+                setTimeout(() => {
+                    path.style.stroke = '#ffb347';
+                    path.style.strokeWidth = '4';
+                    path.style.filter = 'drop-shadow(0 0 15px rgba(255, 179, 71, 1))';
+                    
+                    setTimeout(() => {
+                        path.style.stroke = '#ffd700';
+                        path.style.strokeWidth = '2';
+                        path.style.filter = 'drop-shadow(0 0 20px rgba(255, 215, 0, 0.3))';
+                    }, 500);
+                }, index * 100);
+            });
+            
+            // Add pulse effect to floating symbols
+            const symbols = document.querySelectorAll('.symbol');
+            symbols.forEach(symbol => {
+                symbol.style.animation = 'none';
+                setTimeout(() => {
+                    symbol.style.animation = 'float 6s ease-in-out infinite';
+                }, 50);
+            });
+        }
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const mandala = document.querySelector('.mandala-image');
+            const rings = document.querySelectorAll('.ring');
+            
+            if (mandala) {
+                mandala.style.transform = `rotate(${scrolled * 0.1}deg) scale(${1 + scrolled * 0.0001})`;
+            }
+            
+            rings.forEach((ring, index) => {
+                ring.style.transform = `translate(-50%, -50%) rotate(${-scrolled * (0.05 + index * 0.02)}deg)`;
+            });
+        });
+
+        // Initialize stars on page load
+        window.addEventListener('load', createStars);
+
+        // Add smooth reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.meaning-card, .section-title');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
